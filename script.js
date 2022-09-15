@@ -23,7 +23,22 @@ let passwordGenArray = [];
 
 
 let generatePassword = function () {
-    // let passwordLength = prompt("How many characters does the password need to be?");
+    let passwordLength = prompt("How many characters does the password need to be?");
+
+    if (passwordLength < "8" && passwordLength > "128") {
+        alert("Enter a valid number")
+        return 0;
+    } 
+
+    if (!passwordLength) {
+        alert("Enter a valid number")
+        return 0;
+    }
+
+    if (isNaN(passwordLength)) {
+        alert("Enter a Valid number")
+        return 0;
+    }
 
     let uppercaseSelect = prompt("Do you want uppercase characters? Y/N");
 
@@ -33,43 +48,49 @@ let generatePassword = function () {
 
     let symbolSelect = prompt("Do you want any special symbols in your password? Y/N");
 
-    uppercaseSelect1 = uppercaseSelect.toUpperCase();
+    uppercaseSelect = uppercaseSelect.toUpperCase();
 
-    lowercaseSelect1 = lowercaseSelect.toUpperCase();
+    lowercaseSelect = lowercaseSelect.toUpperCase();
 
-    numericSelect1 = numericSelect.toUpperCase();
+    numericSelect = numericSelect.toUpperCase();
 
-    symbolSelect1 = symbolSelect.toUpperCase();
+    symbolSelect = symbolSelect.toUpperCase();
 
-    if (uppercaseSelect1 === "Y") {
+    if (!confirm(" You have chosen Uppercase: "+uppercaseSelect+" Lowercase: "+lowercaseSelect+" Numbers: "+numericSelect+" Symbols: "+symbolSelect+". Press okay to continue or cancel to start again")) {
+        return 0;
+    }
+
+    if (uppercaseSelect === "Y") {
         for (let i = 0; i < uppercaseAscii.length; i++) {
             passwordGenArray.push(uppercaseAscii[i]);
         }
     }
 
-    if (lowercaseSelect1 === "Y") {
+    if (lowercaseSelect === "Y") {
         for (let i = 0; i < lowercaseAscii.length; i++) {
             passwordGenArray.push(lowercaseAscii[i]);
         }
     }
 
-    if (numericSelect1 === "Y") {
+    if (numericSelect === "Y") {
         for (let i = 0; i < numberAscii.length; i++) {
             passwordGenArray.push(numberAscii[i]);
         }
     }
-    if (symbolSelect1 === "Y") {
+    if (symbolSelect === "Y") {
         for (let i = 0; i < symbolAsciiTotal.length; i++) {
             passwordGenArray.push(symbolAsciiTotal[i]);
         }
     }
+    let password = [];
 
-    console.log(uppercaseSelect);
-    console.log(lowercaseSelect);
-    console.log(numericSelect);
-    console.log(symbolSelect);
+    for (let i = 0; i < passwordLength; i++) {
+        let character = passwordGenArray[Math.floor(Math.random() * passwordGenArray.length)];
+        password.push(String.fromCharCode(character));
+    }
 
-    console.log(passwordGenArray);
+    console.log(password);
+    return password.join('');
 
 }
 
