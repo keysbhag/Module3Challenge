@@ -19,77 +19,98 @@ let symbolAsciiArrayTotal = symbolAsciiArray1.concat(symbolAsciiArray2,symbolAsc
 
 let passwordGeneratorArray = [];
 
+let randomIndexSelector = function (passwordGeneratorArr,passwordLen,password, preSelection) {
+    for (let i = 0; i < (passwordLen - preSelection); i++) {
+        let character = passwordGeneratorArr[Math.floor(Math.random() * passwordGeneratorArr.length)];
+        password.push(String.fromCharCode(character));
+    }
+    return password;
+}
 
 let generatePassword = function () {
     let uppercaseSelect = "No";
     let lowercaseSelect = "No";
     let numberSelect = "No";
     let symbolSelect = "No";
-    
+
     let password = [];
 
+    let selectionCount = 0;
+    
     let passwordLength = prompt("Enter How Many Characters the Password needs to be: (Between 8 - 128)");
    
     if (!passwordLength) {
         alert("Error. Value entered is invalid")
-        return 0;
+        return;
     }
     
     if (isNaN(passwordLength)) {
         alert("Error. Value must be a number!")
-        return 0;
+        return;
+    }
+
+    if (passwordLength % 1 != 0) {
+        alert("Error. Value is a float. Must be an int!");
+        return;
     }
 
     passwordLength = parseInt(passwordLength);
 
     if (passwordLength < 8 || passwordLength > 128) {
         alert("Error. Enter a number in range!")
-        return 0;
-    } 
-
+        return;
+    }
+    
     if (confirm("Do you want uppercase letters?")) {
         uppercaseSelect = "Yes";
-        for (let i = 0; i < uppercaseAsciiArray.length; i++) {
-            passwordGeneratorArray.push(uppercaseAsciiArray[i]);
-        }
+        selectionCount++;
+        let singleChar = uppercaseAsciiArray[Math.floor(Math.random() * uppercaseAsciiArray.length)];
+        password.push(String.fromCharCode(singleChar));
+        passwordGeneratorArray = passwordGeneratorArray.concat(uppercaseAsciiArray);
     }
 
     if (confirm("Do you want lowercase letters?")) {
         lowercaseSelect = "Yes";
-        for (let i = 0; i < lowercaseAsciiArray.length; i++) {
-            passwordGeneratorArray.push(lowercaseAsciiArray[i]);
-        }
+        selectionCount++;
+        let singleChar = lowercaseAsciiArray[Math.floor(Math.random() * lowercaseAsciiArray.length)];
+        password.push(String.fromCharCode(singleChar));
+        passwordGeneratorArray = passwordGeneratorArray.concat(lowercaseAsciiArray);
     }
 
     if (confirm("Do you want numbers in your password?")) {
         numberSelect = "Yes";
-        for (let i = 0; i < numberAsciiArray.length; i++) {
-            passwordGeneratorArray.push(numberAsciiArray[i]);
-        }
+        selectionCount++;
+        let singleChar = numberAsciiArray[Math.floor(Math.random() * numberAsciiArray.length)];
+        password.push(String.fromCharCode(singleChar));
+        passwordGeneratorArray = passwordGeneratorArray.concat(numberAsciiArray);
     }
+
     if (confirm("Do you want symbols in your password?")) {
         symbolSelect = "Yes";
-        for (let i = 0; i < symbolAsciiArrayTotal.length; i++) {
-            passwordGeneratorArray.push(symbolAsciiArrayTotal[i]);
-        }
+        selectionCount++;
+        let singleChar = symbolAsciiArrayTotal[Math.floor(Math.random() * symbolAsciiArrayTotal.length)];
+        password.push(String.fromCharCode(singleChar));
+        passwordGeneratorArray = passwordGeneratorArray.concat(symbolAsciiArrayTotal);
     }
 
     if (uppercaseSelect === "No" && lowercaseSelect === "No" && numberSelect === "No" && symbolSelect === "No") {
         alert("You must select at least one of the conditionals");
-        return 0;
+        return;
     }
 
     if (!confirm(" You have chosen Uppercase: "+uppercaseSelect+". Lowercase: "+lowercaseSelect+". Numbers: "+numberSelect+". Symbols: "+symbolSelect+". Press okay to continue or cancel to start again")) {
-        return 0;
+        return;
     }
 
-    for (let i = 0; i <= passwordLength; i++) {
-        let character = passwordGeneratorArray[Math.floor(Math.random() * passwordGeneratorArray.length)];
-        password.push(String.fromCharCode(character));
-    }
+    password = randomIndexSelector(passwordGeneratorArray,passwordLength,password, selectionCount);
 
-    return password.join('');
+    password.sort(function(){return 0.5 - Math.random()});
 
+    console.log(password);
+
+    password = password.join('')
+    
+    return password;
 }
 
 // Write password to the #password input
