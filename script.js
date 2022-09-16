@@ -9,69 +9,68 @@ let populateArray = function(start, end) {
     return numberArray;
 }
 
-let symbolAscii1 = populateArray(33,47);
-let symbolAscii2 = populateArray(58,64);
-let symbolAscii3 = populateArray(91,96);
-let lowercaseAscii = populateArray(97, 122);
-let uppercaseAscii = populateArray(65, 90); 
-let numberAscii = populateArray(48, 57);
-let symbolAsciiTotal = symbolAscii1.concat(symbolAscii2,symbolAscii3);
+let symbolAsciiArray1 = populateArray(33,47);
+let symbolAsciiArray2 = populateArray(58,64);
+let symbolAsciiArray3 = populateArray(91,96);
+let lowercaseAsciiArray = populateArray(97, 122);
+let uppercaseAsciiArray = populateArray(65, 90); 
+let numberAsciiArray = populateArray(48, 57);
+let symbolAsciiArrayTotal = symbolAsciiArray1.concat(symbolAsciiArray2,symbolAsciiArray3);
 
-let passwordGenArray = [];
-
+let passwordGeneratorArray = [];
 
 
 let generatePassword = function () {
-    let passwordLength = prompt("How many characters does the password need to be?");
-
     let uppercaseSelect = "No";
     let lowercaseSelect = "No";
     let numberSelect = "No";
     let symbolSelect = "No";
-
+    
     let password = [];
+
+    let passwordLength = prompt("Enter How Many Characters the Password needs to be: (Between 8 - 128)");
+   
+    if (!passwordLength) {
+        alert("Error. Value entered is invalid")
+        return 0;
+    }
+    
+    if (isNaN(passwordLength)) {
+        alert("Error. Value must be a number!")
+        return 0;
+    }
 
     passwordLength = parseInt(passwordLength);
 
-    if (!passwordLength) {
-        alert("Enter a +alid number")
-        return 0;
-    }
-
     if (passwordLength < 8 || passwordLength > 128) {
-        alert("Enter a !alid number")
+        alert("Error. Enter a number in range!")
         return 0;
     } 
 
-    if (isNaN(passwordLength)) {
-        alert("Enter a Walid number")
-        return 0;
-    }
-
     if (confirm("Do you want uppercase letters?")) {
         uppercaseSelect = "Yes";
-        for (let i = 0; i < uppercaseAscii.length; i++) {
-            passwordGenArray.push(uppercaseAscii[i]);
+        for (let i = 0; i < uppercaseAsciiArray.length; i++) {
+            passwordGeneratorArray.push(uppercaseAsciiArray[i]);
         }
     }
 
     if (confirm("Do you want lowercase letters?")) {
         lowercaseSelect = "Yes";
-        for (let i = 0; i < lowercaseAscii.length; i++) {
-            passwordGenArray.push(lowercaseAscii[i]);
+        for (let i = 0; i < lowercaseAsciiArray.length; i++) {
+            passwordGeneratorArray.push(lowercaseAsciiArray[i]);
         }
     }
 
     if (confirm("Do you want numbers in your password?")) {
         numberSelect = "Yes";
-        for (let i = 0; i < numberAscii.length; i++) {
-            passwordGenArray.push(numberAscii[i]);
+        for (let i = 0; i < numberAsciiArray.length; i++) {
+            passwordGeneratorArray.push(numberAsciiArray[i]);
         }
     }
     if (confirm("Do you want symbols in your password?")) {
         symbolSelect = "Yes";
-        for (let i = 0; i < symbolAsciiTotal.length; i++) {
-            passwordGenArray.push(symbolAsciiTotal[i]);
+        for (let i = 0; i < symbolAsciiArrayTotal.length; i++) {
+            passwordGeneratorArray.push(symbolAsciiArrayTotal[i]);
         }
     }
 
@@ -84,8 +83,8 @@ let generatePassword = function () {
         return 0;
     }
 
-    for (let i = 0; i < passwordLength; i++) {
-        let character = passwordGenArray[Math.floor(Math.random() * passwordGenArray.length)];
+    for (let i = 0; i <= passwordLength; i++) {
+        let character = passwordGeneratorArray[Math.floor(Math.random() * passwordGeneratorArray.length)];
         password.push(String.fromCharCode(character));
     }
 
