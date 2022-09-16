@@ -17,8 +17,6 @@ let uppercaseAsciiArray = populateArray(65, 90);
 let numberAsciiArray = populateArray(48, 57);
 let symbolAsciiArrayTotal = symbolAsciiArray1.concat(symbolAsciiArray2,symbolAsciiArray3);
 
-let passwordGeneratorArray = [];
-
 let randomIndexSelector = function (passwordGeneratorArr,passwordLen,password, preSelection) {
     for (let i = 0; i < (passwordLen - preSelection); i++) {
         let character = passwordGeneratorArr[Math.floor(Math.random() * passwordGeneratorArr.length)];
@@ -32,6 +30,8 @@ let generatePassword = function () {
     let lowercaseSelect = "No";
     let numberSelect = "No";
     let symbolSelect = "No";
+
+    let passwordGeneratorArray = [];
 
     let password = [];
 
@@ -64,32 +64,32 @@ let generatePassword = function () {
     if (confirm("Do you want uppercase letters?")) {
         uppercaseSelect = "Yes";
         selectionCount++;
-        let singleChar = uppercaseAsciiArray[Math.floor(Math.random() * uppercaseAsciiArray.length)];
-        password.push(String.fromCharCode(singleChar));
+        let singleCharU = uppercaseAsciiArray[Math.floor(Math.random() * uppercaseAsciiArray.length)];
+        password.push(String.fromCharCode(singleCharU));
         passwordGeneratorArray = passwordGeneratorArray.concat(uppercaseAsciiArray);
     }
 
     if (confirm("Do you want lowercase letters?")) {
         lowercaseSelect = "Yes";
         selectionCount++;
-        let singleChar = lowercaseAsciiArray[Math.floor(Math.random() * lowercaseAsciiArray.length)];
-        password.push(String.fromCharCode(singleChar));
+        let singleCharL = lowercaseAsciiArray[Math.floor(Math.random() * lowercaseAsciiArray.length)];
+        password.push(String.fromCharCode(singleCharL));
         passwordGeneratorArray = passwordGeneratorArray.concat(lowercaseAsciiArray);
     }
 
     if (confirm("Do you want numbers in your password?")) {
         numberSelect = "Yes";
         selectionCount++;
-        let singleChar = numberAsciiArray[Math.floor(Math.random() * numberAsciiArray.length)];
-        password.push(String.fromCharCode(singleChar));
+        let singleCharN = numberAsciiArray[Math.floor(Math.random() * numberAsciiArray.length)];
+        password.push(String.fromCharCode(singleCharN));
         passwordGeneratorArray = passwordGeneratorArray.concat(numberAsciiArray);
     }
 
     if (confirm("Do you want symbols in your password?")) {
         symbolSelect = "Yes";
         selectionCount++;
-        let singleChar = symbolAsciiArrayTotal[Math.floor(Math.random() * symbolAsciiArrayTotal.length)];
-        password.push(String.fromCharCode(singleChar));
+        let singleCharS = symbolAsciiArrayTotal[Math.floor(Math.random() * symbolAsciiArrayTotal.length)];
+        password.push(String.fromCharCode(singleCharS));
         passwordGeneratorArray = passwordGeneratorArray.concat(symbolAsciiArrayTotal);
     }
 
