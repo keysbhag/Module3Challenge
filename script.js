@@ -121,7 +121,7 @@ let generatePassword = function () {
     }
 
     // Final confirmation of the selected parameters. If users chooses cancel he can go back and click generate password to make new parameters, otherwise password generates
-    if (!confirm(" You have chosen Uppercase: "+uppercaseSelect+". Lowercase: "+lowercaseSelect+". Numbers: "+numberSelect+". Symbols: "+symbolSelect+". Press okay to continue or cancel to start again")) {
+    if (!confirm(" You have chosen Uppercase: "+uppercaseSelect+". Lowercase: "+lowercaseSelect+". Numbers: "+numberSelect+". Symbols: "+symbolSelect+". Characters: "+passwordLength+". Press okay to continue or cancel to start again")) {
         return;
     }
 
