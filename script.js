@@ -24,7 +24,7 @@ let symbolAsciiArrayTotal = symbolAsciiArray1.concat(symbolAsciiArray2,symbolAsc
 // randomCharacterSelector Function takes the passwordGeneratorArray that is populated with the selected character arrays and 
 // uses a for loop to push the requested password length of random characters, minus the preselected minimum 
 // characters to the password array variable 
-let randomCharacterSelector = function (passwordGeneratorArr,passwordLen,password, preSelection) {
+let randomCharacterSelector = function (passwordGeneratorArr, passwordLen, password, preSelection) {
     for (let i = 0; i < (passwordLen - preSelection); i++) {
         let character = passwordGeneratorArr[Math.floor(Math.random() * passwordGeneratorArr.length)];
         password.push(String.fromCharCode(character));
@@ -83,11 +83,11 @@ let generatePassword = function () {
         uppercaseSelect = "Yes"; // Sets value for final confirmation to say yes 
         selectionCount++; // Updates the selection count
         let singleCharU = uppercaseAsciiArray[Math.floor(Math.random() * uppercaseAsciiArray.length)]; // In order to ensure there is atleast one of the selected characters we randomly choose a character  
-        password.push(String.fromCharCode(singleCharU));                                               // from the uppercaseAsciiArray and populate it in the password array to later be randomized later 
+        password.push(String.fromCharCode(singleCharU));                                               // from the uppercaseAsciiArray and populate it in the password array to later be randomized again 
         passwordGeneratorArray = passwordGeneratorArray.concat(uppercaseAsciiArray); // Concats the uppercase array to the passwordGeneratorArray            
     }
     
-    // Prompts user to choose if the want lowercase letters. All rules of the uppercase if statement apply to this block of code
+    // Prompts user to choose if they want lowercase letters. All rules of the uppercase "if statement" apply to this block of code
     if (confirm("Do you want lowercase letters?")) {
         lowercaseSelect = "Yes";
         selectionCount++;
@@ -96,7 +96,7 @@ let generatePassword = function () {
         passwordGeneratorArray = passwordGeneratorArray.concat(lowercaseAsciiArray);
     }
 
-    // Prompts user to choose if the want numbers. All rules of the uppercase if statement apply to this block of code
+    // Prompts user to choose if the want numbers. All rules of the uppercase "if statement" apply to this block of code
     if (confirm("Do you want numbers in your password?")) {
         numberSelect = "Yes";
         selectionCount++;
@@ -105,7 +105,7 @@ let generatePassword = function () {
         passwordGeneratorArray = passwordGeneratorArray.concat(numberAsciiArray);
     }
 
-    // Prompts user to choose if the want symbols. All rules of the uppercase if statement apply to this block of code
+    // Prompts user to choose if the want symbols. All rules of the uppercase "if statement" apply to this block of code
     if (confirm("Do you want symbols in your password?")) {
         symbolSelect = "Yes";
         selectionCount++;
@@ -120,7 +120,7 @@ let generatePassword = function () {
         return;
     }
 
-    // Final confirmation of the selected parameters. If users chooses cancel he can go back and click generate password to make new parameters
+    // Final confirmation of the selected parameters. If users chooses cancel he can go back and click generate password to make new parameters, otherwise password generates
     if (!confirm(" You have chosen Uppercase: "+uppercaseSelect+". Lowercase: "+lowercaseSelect+". Numbers: "+numberSelect+". Symbols: "+symbolSelect+". Press okay to continue or cancel to start again")) {
         return;
     }
@@ -128,7 +128,7 @@ let generatePassword = function () {
     // Calls the randomCharacterSelector function to populate the password array
     password = randomCharacterSelector(passwordGeneratorArray,passwordLength,password, selectionCount);
 
-    // Rearranges the password array so its first indices is not populated with preselected random characters
+    // Rearranges the password array so its first indices are not populated with preselected random characters
     password.sort(function(){return 0.5 - Math.random()});
 
     // Turns password from an array to a string by joining each character to an empty string 
